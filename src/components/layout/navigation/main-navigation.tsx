@@ -13,7 +13,9 @@ export default function MainNavigation() {
 
   return (
     <nav>
-      <ul>{navItems}</ul>
+      <ul className="flex justify-between gap-6 items-center h-full">
+        {navItems}
+      </ul>
     </nav>
   );
 }
