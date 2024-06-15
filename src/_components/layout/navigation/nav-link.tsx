@@ -10,5 +10,9 @@ interface NavLinkProps {
 
 export default function NavLink({ href, children }: NavLinkProps) {
   const isActivePath = href === usePathname();
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link href={href} className="hover:text-accent-400 transition-colors">
+      {children}
+    </Link>
+  );
 }

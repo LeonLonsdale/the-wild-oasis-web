@@ -12,10 +12,8 @@ export default function MainNavigation() {
   });
 
   return (
-    <nav>
-      <ul className="flex justify-between gap-6 items-center h-full">
-        {navItems}
-      </ul>
+    <nav className="z-10 text-xl items-center h-full">
+      <ul className="flex gap-16 items-center h-full">{navItems}</ul>
     </nav>
   );
 }
