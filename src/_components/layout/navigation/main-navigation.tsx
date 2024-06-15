@@ -1,4 +1,4 @@
-import { mainNavItems } from "@/lib/paths";
+import { mainNavItems } from "@/_lib/paths";
 import NavLink from "./nav-link";
 
 export default function MainNavigation() {
