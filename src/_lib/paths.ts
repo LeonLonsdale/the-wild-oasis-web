@@ -1,5 +1,40 @@
-import { pathManager } from "next-path-helper";
+interface Paths {
+  [key: string]: {
+    label: string;
+    path: (...args: (string | number)[]) => string;
+    navs: string[];
+  };
+}
 
-export const { getPath, getNavList, makeNavList, addPathsToNav } = pathManager;
+export type NavLink = {
+  label: string;
+  path: (...args: (string | number)[]) => string;
+};
 
-export const navList = makeNavList(["home", "about", "cabins", "account"]);
+const paths: Paths = {
+  home: {
+    label: "Home",
+    path: () => "/",
+    navs: ["mainNav"],
+  },
+  about: {
+    label: "About",
+    path: () => "/about",
+    navs: ["mainNav"],
+  },
+  cabins: {
+    label: "Cabins",
+    path: () => "/cabins",
+    navs: ["mainNav"],
+  },
+  account: {
+    label: "Account",
+    path: () => "/account",
+    navs: ["mainNav"],
+  },
+};
+
+export const getPath = (key: string) => paths[key].path();
+
+export const makeNav = (keys: string[]): NavLink[] =>
+  keys.map((key) => paths[key] || null).filter((navLink) => navLink !== null);
