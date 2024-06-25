@@ -1,12 +1,12 @@
-import { mainNavItems } from "@/_lib/paths";
+import { navList } from "@/_lib/paths";
 import NavLink from "./nav-link";
 
 export default function MainNavigation() {
-  const navItems = mainNavItems.map((item) => {
+  const navItems = navList.map((item) => {
     if (item)
       return (
-        <li key={item.path}>
-          <NavLink href={item.path}>{item.label}</NavLink>
+        <li key={item.path()}>
+          <NavLink href={item.path()}>{item.label}</NavLink>
         </li>
       );
   });
