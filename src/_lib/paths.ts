@@ -1,14 +1,13 @@
-interface Paths {
-  [key: string]: {
-    label: string;
-    path: (...args: (string | number)[]) => string;
-    navs: string[];
-  };
-}
+export type PathFn = (...args: (string | number)[]) => string;
 
 export type NavLink = {
   label: string;
-  path: (...args: (string | number)[]) => string;
+  path: PathFn;
+};
+export type Paths = {
+  [key: string]: {
+    navs: string[];
+  } & NavLink;
 };
 
 const paths: Paths = {
@@ -28,13 +27,13 @@ const paths: Paths = {
     navs: ["mainNav"],
   },
   account: {
-    label: "Account",
+    label: "Guest Area",
     path: () => "/account",
     navs: ["mainNav"],
   },
 };
 
-export const getPath = (key: string) => paths[key].path();
+export const getPath = (key: string) => paths[key]?.path() ?? null;
 
 export const makeNav = (keys: string[]): NavLink[] =>
-  keys.map((key) => paths[key] || null).filter((navLink) => navLink !== null);
+  keys.map((key) => paths[key] ?? null).filter((navLink) => navLink !== null);

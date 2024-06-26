@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/../public/logo.png";
+import { getPath } from "@/_lib/paths";
 
 export default function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-4 z-10">
+    <Link href={getPath("home")} className="flex items-center gap-4 z-10">
       <Image
         src={logo}
         height="60"
