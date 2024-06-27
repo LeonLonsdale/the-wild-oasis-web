@@ -1,7 +1,5 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
-import { Cabin } from "@/_lib/types";
-
-type CabinCardProps = { cabin: Cabin };
+import { Cabin, CabinCardProps } from "@/_lib/types";
 
 export default function CabinCard({ cabin }: CabinCardProps) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;

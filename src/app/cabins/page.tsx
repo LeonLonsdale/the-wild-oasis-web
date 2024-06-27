@@ -1,5 +1,5 @@
 import CabinCard from "@/_components/cabins/cabin-card";
-import { Cabin } from "@/_lib/types";
+import { CabinDB } from "@/_lib/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function CabinsPage() {
-  const cabins: Cabin[] = [];
+  const cabins: CabinDB[] = [];
 
   return (
     <div>

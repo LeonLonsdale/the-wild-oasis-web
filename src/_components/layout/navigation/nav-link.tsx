@@ -1,12 +1,8 @@
 "use client";
 
+import { NavLinkProps } from "@/_lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-interface NavLinkProps {
-  href: string;
-  children: React.ReactNode;
-}
 
 export default function NavLink({ href, children }: NavLinkProps) {
   const isActivePath = href === usePathname();

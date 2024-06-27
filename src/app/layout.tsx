@@ -4,6 +4,7 @@ import "@/_styles/globals.css";
 import MainNavigation from "@/_components/layout/navigation/main-navigation";
 import Header from "@/_components/layout/header/header";
 import Logo from "@/_components/common/logo";
+import { WithChildren } from "@/_lib/types";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -18,11 +19,7 @@ export const metadata: Metadata = {
   description: "Luxurious cabins in beautiful locations.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: WithChildren) {
   return (
     <html lang="en">
       <body

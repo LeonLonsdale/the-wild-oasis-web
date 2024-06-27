@@ -1,5 +1,5 @@
 import ReservationCard from "@/_components/account/reservation-card";
-import { Booking } from "@/_lib/types";
+import { BookingDB } from "@/_lib/types";
 
 export const metadata = {
   title: "Reservations",
@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function ReservationsPage() {
   // CHANGE
-  const bookings: Booking[] = [];
+  const bookings: BookingDB[] = [];
 
   return (
     <div>

@@ -1,7 +1,5 @@
-import { Booking } from "@/_lib/types";
+import { DeleteReservationProps } from "@/_lib/types";
 import { TrashIcon } from "@heroicons/react/24/solid";
-
-type DeleteReservationProps = { bookingId: Pick<Booking, "id"> };
 
 function DeleteReservation({ bookingId }: DeleteReservationProps) {
   return (

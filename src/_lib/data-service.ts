@@ -1,9 +1,10 @@
 import { eachDayOfInterval } from "date-fns";
+import { BookingId, CabinId } from "./types";
 
 /////////////
 // GET
 
-export async function getCabin(id) {
+export async function getCabin(id: CabinId) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -20,7 +21,7 @@ export async function getCabin(id) {
   return data;
 }
 
-export async function getCabinPrice(id) {
+export async function getCabinPrice(id: CabinId) {
   const { data, error } = await supabase
     .from("cabins")
     .select("regularPrice, discount")
@@ -60,7 +61,7 @@ export async function getGuest(email) {
   return data;
 }
 
-export async function getBooking(id) {
+export async function getBooking(id: BookingId) {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")
@@ -93,17 +94,17 @@ export async function getBookings(guestId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId) {
+export async function getBookedDatesByCabinId(cabinId: CabinId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
-  today = today.toISOString();
+  const todayISOString = today.toISOString();
 
   // Getting all bookings
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
     .eq("cabinId", cabinId)
-    .or(`startDate.gte.${today},status.eq.checked-in`);
+    .or(`startDate.gte.${todayISOString},status.eq.checked-in`);
 
   if (error) {
     console.error(error);
