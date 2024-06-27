@@ -1,8 +1,15 @@
+import {
+  CalendarDaysIcon,
+  HomeIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
+
 export type PathFn = (...args: (string | number)[]) => string;
 
 export type NavLink = {
   label: string;
   path: PathFn;
+  icon?: React.ReactNode;
 };
 export type Paths = {
   [key: string]: {
@@ -27,9 +34,22 @@ const paths: Paths = {
     navs: ["mainNav"],
   },
   account: {
-    label: "Guest Area",
+    label: "My Account",
     path: () => "/account",
     navs: ["mainNav"],
+    icon: <HomeIcon className="h-5 w-5 text-primary-600" />,
+  },
+  accountReservations: {
+    label: "Reservations",
+    path: () => "/account/reservations",
+    navs: ["accountNav"],
+    icon: <CalendarDaysIcon className="h-5 w-5 text-primary-600" />,
+  },
+  accountProfile: {
+    label: "Profile",
+    path: () => "/account/profile",
+    navs: ["accountNav"],
+    icon: <UserIcon className="h-5 w-5 text-primary-600" />,
   },
 };
 
