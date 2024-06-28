@@ -1,11 +1,11 @@
 import { eachDayOfInterval } from "date-fns";
-import { BookingId, CabinId } from "./types";
+import type { Booking, DatabaseId, Email, Guest } from "./types";
 import { supabase } from "./supabase";
 
 /////////////
 // GET
 
-export async function getCabin(id: CabinId) {
+export async function getCabin(id: DatabaseId) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -22,7 +22,7 @@ export async function getCabin(id: CabinId) {
   return data;
 }
 
-export async function getCabinPrice(id: CabinId) {
+export async function getCabinPrice(id: DatabaseId) {
   const { data, error } = await supabase
     .from("cabins")
     .select("regularPrice, discount")
@@ -51,7 +51,7 @@ export const getCabins = async function () {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email) {
+export async function getGuest(email: Email) {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -62,7 +62,7 @@ export async function getGuest(email) {
   return data;
 }
 
-export async function getBooking(id: BookingId) {
+export async function getBooking(id: DatabaseId) {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")
@@ -77,7 +77,7 @@ export async function getBooking(id: BookingId) {
   return data;
 }
 
-export async function getBookings(guestId) {
+export async function getBookings(guestId: DatabaseId) {
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
@@ -95,7 +95,7 @@ export async function getBookings(guestId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId: CabinId) {
+export async function getBookedDatesByCabinId(cabinId: DatabaseId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   const todayISOString = today.toISOString();
@@ -151,7 +151,7 @@ export async function getCountries() {
 /////////////
 // CREATE
 
-export async function createGuest(newGuest) {
+export async function createGuest(newGuest: Guest) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
@@ -162,7 +162,7 @@ export async function createGuest(newGuest) {
   return data;
 }
 
-export async function createBooking(newBooking) {
+export async function createBooking(newBooking: Booking) {
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
@@ -182,7 +182,7 @@ export async function createBooking(newBooking) {
 // UPDATE
 
 // The updatedFields is an object which should ONLY contain the updated data
-export async function updateGuest(id, updatedFields) {
+export async function updateGuest(id: DatabaseId, updatedFields: Guest) {
   const { data, error } = await supabase
     .from("guests")
     .update(updatedFields)
@@ -197,7 +197,7 @@ export async function updateGuest(id, updatedFields) {
   return data;
 }
 
-export async function updateBooking(id, updatedFields) {
+export async function updateBooking(id: DatabaseId, updatedFields: Booking) {
   const { data, error } = await supabase
     .from("bookings")
     .update(updatedFields)
@@ -215,7 +215,7 @@ export async function updateBooking(id, updatedFields) {
 /////////////
 // DELETE
 
-export async function deleteBooking(id) {
+export async function deleteBooking(id: DatabaseId) {
   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 
   if (error) {
