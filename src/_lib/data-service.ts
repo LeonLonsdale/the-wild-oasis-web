@@ -1,5 +1,6 @@
 import { eachDayOfInterval } from "date-fns";
 import { BookingId, CabinId } from "./types";
+import { supabase } from "./supabase";
 
 /////////////
 // GET
