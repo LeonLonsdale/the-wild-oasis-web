@@ -33,6 +33,11 @@ const paths: Paths = {
     path: () => "/cabins",
     navs: ["mainNav"],
   },
+  viewCabin: {
+    label: "View Cabin",
+    path: (...args: (string | number)[]) => `/cabins/${args[0]}`,
+    navs: ["cabinsNav"],
+  },
   account: {
     label: "My Account",
     path: () => "/account",
@@ -53,7 +58,8 @@ const paths: Paths = {
   },
 };
 
-export const getPath = (key: string) => paths[key]?.path() ?? null;
+export const getPath = (key: string, ...args: (string | number)[]) =>
+  args.length ? paths[key].path(...args) : paths[key].path();
 
 export const makeNav = (keys: string[]): NavLink[] =>
   keys.map((key) => paths[key] ?? null).filter((navLink) => navLink !== null);
