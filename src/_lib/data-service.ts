@@ -1,11 +1,18 @@
 import { eachDayOfInterval } from "date-fns";
-import type { Booking, DatabaseId, Email, Guest } from "./types";
+import type {
+  Booking,
+  CabinDB,
+  CabinsList,
+  DatabaseId,
+  Email,
+  Guest,
+} from "./types";
 import { supabase } from "./supabase";
 
 /////////////
 // GET
 
-export async function getCabin(id: DatabaseId) {
+export async function getCabin(id: DatabaseId): Promise<CabinDB> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -36,7 +43,7 @@ export async function getCabinPrice(id: DatabaseId) {
   return data;
 }
 
-export const getCabins = async function () {
+export const getCabins = async function (): Promise<CabinsList[]> {
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
