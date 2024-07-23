@@ -29,7 +29,6 @@ export default function CabinCard({ cabin }: CabinCardProps) {
               For up to <span className="font-bold">{maxCapacity}</span> guests
             </p>
           </div>
-          as
           <p className="flex gap-3 justify-end items-baseline">
             {discount > 0 ? (
               <>

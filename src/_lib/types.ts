@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 
 // Common types
 export type DatabaseId = { id: string };
-type DatabaseCreatedAt = { created_at: string };
+export type DatabaseCreatedAt = { created_at: string };
 export type Email = string;
 
 // Cabin types
@@ -37,6 +37,10 @@ export type Booking = {
   };
 };
 export type BookingDB = Booking & DatabaseId & DatabaseCreatedAt;
+export type BookingsList = Omit<
+  BookingDB,
+  "observations status isPaid hasBreakfast extrasPrice cabinPrice"
+>;
 
 // Guest types
 export type Guest = {
@@ -56,3 +60,4 @@ export type DeleteReservationProps = Readonly<{
 }>;
 export type CabinCardProps = Readonly<{ cabin: CabinsList }>;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
+export type CabinPageProps = Readonly<{ params: { cabinId: DatabaseId } }>;
