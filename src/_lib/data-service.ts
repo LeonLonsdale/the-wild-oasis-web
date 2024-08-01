@@ -232,3 +232,19 @@ export async function deleteBooking(id: DatabaseId) {
   }
   return data;
 }
+
+/////////////
+// Count
+
+export async function getEntryCount(tableName: string) {
+  const { count, error } = await supabase
+    .from(tableName)
+    .select("id", { count: "exact" });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Count could not be loaded");
+  }
+
+  return count;
+}
