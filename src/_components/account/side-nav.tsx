@@ -1,6 +1,9 @@
+"use client";
+
 import { makeNav } from "@/_lib/paths";
 import Link from "next/link";
 import SignOutButton from "./signout-button";
+import { usePathname } from "next/navigation";
 
 const accountNav = makeNav([
   "account",
@@ -9,11 +12,16 @@ const accountNav = makeNav([
 ]);
 
 export default function SideNavigation() {
+  const pathname = usePathname();
+
   const accountNavList = accountNav.map((navLink) => (
     <li key={navLink.label}>
       <Link
         href={navLink.path()}
-        className={`py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200`}
+        className={`py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200
+          ${
+            pathname === navLink.path() ? "bg-primary-900 text-primary-100" : ""
+          }`}
       >
         {navLink.icon}
         <span>{navLink.label}</span>
