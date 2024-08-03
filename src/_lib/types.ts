@@ -62,3 +62,4 @@ export type CabinCardProps = Readonly<{ cabin: CabinsList }>;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
 export type CabinPageProps = Readonly<{ params: { cabinId: DatabaseId } }>;
 export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
+export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;

@@ -1,3 +1,4 @@
+import TextExpander from "@/_components/common/text-expander";
 import { getCabin, getCabins } from "@/_lib/data-service";
 import { CabinPageProps } from "@/_lib/types";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
@@ -45,7 +46,9 @@ export default async function Page({ params }: CabinPageProps) {
             Cabin {name}
           </h3>
 
-          <p className="text-lg text-primary-300 mb-10">{description}</p>
+          <p className="text-lg text-primary-300 mb-10">
+            <TextExpander numWords={40}>{description}</TextExpander>
+          </p>
 
           <ul className="flex flex-col gap-4 mb-7">
             <li className="flex gap-3 items-center">
