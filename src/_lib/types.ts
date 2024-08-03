@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { MouseEventHandler, PropsWithChildren } from "react";
 
 // Common types
 export type DatabaseId = { id: string };
@@ -60,6 +60,23 @@ export type DeleteReservationProps = Readonly<{
 }>;
 export type CabinCardProps = Readonly<{ cabin: CabinsList }>;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
+export type CabinsPageProps = Readonly<{
+  searchParams: { [key: string]: CabinFilterOptions };
+}>;
+export type CabinListProps = Readonly<{ filter: CabinFilter }>;
 export type CabinPageProps = Readonly<{ params: { cabinId: DatabaseId } }>;
 export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
 export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;
+export type FilterButtonProps = Readonly<
+  {
+    filter: CabinFilter;
+    onClick: (filter: CabinFilter) => void;
+    activeFilter: string;
+  } & WithChildren
+>;
+
+// cabins filter
+
+export type CabinFilterOptions = "small" | "medium" | "large";
+export type CabinFilter = CabinFilterOptions | "all";
+export type FilterConditions = { low: number; high: number };
