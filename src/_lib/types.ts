@@ -80,3 +80,16 @@ export type FilterButtonProps = Readonly<
 export type CabinFilterOptions = "small" | "medium" | "large";
 export type CabinFilter = CabinFilterOptions | "all";
 export type FilterConditions = { low: number; high: number };
+
+// user profile
+
+export type UpdateProfileFormProps = WithChildren;
+
+export type SelectCountryProps = Readonly<{
+  name: string;
+  id: string;
+  className: string;
+  defaultCountry: string;
+}>;
+
+export type Country = { name: string; flag: string };
