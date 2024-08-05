@@ -3,8 +3,10 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import { DatabaseId } from "./types";
 
-export type PathFn = (...args: (string | number)[]) => string;
+export type PathFn = (...args: PathFnArg[]) => string;
+export type PathFnArg = string | number | DatabaseId;
 
 export type NavLink = {
   label: string;
@@ -35,7 +37,7 @@ const paths: Paths = {
   },
   viewCabin: {
     label: "View Cabin",
-    path: (...args: (string | number)[]) => `/cabins/${args[0]}`,
+    path: (...args: (string | number | DatabaseId)[]) => `/cabins/${args[0]}`,
     navs: ["cabinsNav"],
   },
   account: {
@@ -58,7 +60,7 @@ const paths: Paths = {
   },
 };
 
-export const getPath = (key: string, ...args: (string | number)[]) =>
+export const getPath = (key: string, ...args: PathFnArg[]) =>
   args.length ? paths[key].path(...args) : paths[key].path();
 
 export const makeNav = (keys: string[]): NavLink[] =>

@@ -104,7 +104,9 @@ export async function getBookings(guestId: DatabaseId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId: DatabaseId) {
+export async function getBookedDatesByCabinId(
+  cabinId: DatabaseId
+): Promise<Date[]> {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   const todayISOString = today.toISOString();
