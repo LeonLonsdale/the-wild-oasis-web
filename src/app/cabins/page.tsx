@@ -1,5 +1,6 @@
 import CabinList from "@/_components/cabins/cabin-list";
 import Filter from "@/_components/cabins/filter";
+import ReservationReminder from "@/_components/cabins/reservation-reminder";
 import Spinner from "@/_components/common/spinner";
 import { CabinsPageProps } from "@/_lib/types";
 
@@ -33,6 +34,7 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
       {/* key = filter to ensure suspense is used on each filter */}
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

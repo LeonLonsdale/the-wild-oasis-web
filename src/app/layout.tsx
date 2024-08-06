@@ -5,6 +5,7 @@ import MainNavigation from "@/_components/layout/navigation/main-navigation";
 import Header from "@/_components/layout/header/header";
 import Logo from "@/_components/common/logo";
 import { WithChildren } from "@/_lib/types";
+import { ReservationContextProvider } from "@/_contexts/ReservationContext";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -30,7 +31,9 @@ export default function RootLayout({ children }: WithChildren) {
           <MainNavigation />
         </Header>
         <main className="flex-1 px-8 py-12 grid">
-          <div className="max-w-7xl mx-auto w-full">{children}</div>
+          <div className="max-w-7xl mx-auto w-full">
+            <ReservationContextProvider>{children}</ReservationContextProvider>
+          </div>
         </main>
       </body>
     </html>

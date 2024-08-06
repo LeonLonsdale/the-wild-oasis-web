@@ -2,6 +2,7 @@ import { getBookedDatesByCabinId, getSettings } from "@/_lib/data-service";
 import DateSelector from "./date-selector";
 import ReservationForm from "./reservation-form";
 import { ReservationProps } from "@/_lib/types";
+import { ReservationContextProvider } from "@/_contexts/ReservationContext";
 
 export default async function Reservation({ cabin }: ReservationProps) {
   const cabinId = cabin.id;

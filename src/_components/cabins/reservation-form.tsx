@@ -1,6 +1,11 @@
+"use client";
+
+import { useReservationContext } from "@/_contexts/ReservationContext";
 import { ReservationFormProps } from "@/_lib/types";
 
 function ReservationForm({ cabin }: ReservationFormProps) {
+  const { range } = useReservationContext();
+
   // CHANGE
   const { maxCapacity } = cabin;
 

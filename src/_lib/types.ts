@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import { DateRange } from "react-day-picker";
 
 // #################################################
 // Common types
@@ -121,6 +122,7 @@ export type CabinsPageProps = Readonly<{
 
 // Feature-Specific Props
 export type CabinProps = Readonly<{ cabin: CabinDB }>;
+export type DatePickerDateRange = DateRange | undefined;
 export type FilterButtonProps = Readonly<
   {
     activeFilter: string;
