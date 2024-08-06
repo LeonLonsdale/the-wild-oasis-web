@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, { params }: Params) {
     return Response.json({ status: 200, cabin, bookedDates });
   } catch (error: unknown) {
     if (typeof error === "object" && error !== null && "digest" in error) {
-      if ((error as { digest: string }).digest === "NEXT_NOT_FOUND")
+      if (error.digest === "NEXT_NOT_FOUND")
         return Response.json({ status: 404, message: "Cabin not found" });
     }
     return Response.json({ status: 500, message: "Something went wrong" });
