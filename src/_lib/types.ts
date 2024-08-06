@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { DateRange } from "react-day-picker";
+import { User } from "next-auth";
 
 // #################################################
 // Common types
@@ -14,6 +15,7 @@ export type DatabaseCreatedAt = string;
 export type DatabaseId = string;
 export type Email = string;
 export type FilterConditions = { low: number; high: number };
+export type NextAuthGoogleUser = { name: string; image: string; email: string };
 
 // #################################################
 // Database Types
@@ -57,12 +59,10 @@ export type Booking = Omit<BookingDB, "created_at" | "id">;
 export type GuestDB = {
   countryFlag: string;
   created_at: DatabaseCreatedAt;
-  email: Email;
   fullName: string;
   nationalID: string;
   nationality: string;
-  id: DatabaseId;
-};
+} & Omit<User, "name">;
 export type Guest = Omit<GuestDB, "created_at" | "id">;
 
 // Settings
@@ -93,7 +93,10 @@ export type DeleteReservationProps = Readonly<{ bookingId: DatabaseId }>;
 export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
 export type ReservationCardProps = Readonly<{ booking: BookingDB }>;
-export type ReservationFormProps = Readonly<{ cabin: CabinDB }>;
+export type ReservationFormProps = Readonly<{
+  cabin: CabinDB;
+  user: User;
+}>;
 export type SelectCountryProps = Readonly<{
   className: string;
   defaultCountry: string;
@@ -130,4 +133,6 @@ export type FilterButtonProps = Readonly<
     onClick: (filter: CabinFilter) => void;
   } & WithChildren
 >;
-export type ReservationProps = Readonly<{ cabin: CabinDB }>;
+export type ReservationProps = Readonly<{
+  cabin: CabinDB;
+}>;
