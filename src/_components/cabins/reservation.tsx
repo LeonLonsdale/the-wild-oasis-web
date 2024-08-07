@@ -1,5 +1,5 @@
 import { getBookedDatesByCabinId, getSettings } from "@/_lib/data-service";
-import { ReservationProps } from "@/_lib/types";
+import { ReservationProps, TAuthSession } from "@/_lib/types";
 import DateSelector from "./date-selector";
 import ReservationForm from "./reservation-form";
 import { auth } from "@/_lib/auth";
@@ -12,7 +12,7 @@ export default async function Reservation({ cabin }: ReservationProps) {
     getBookedDatesByCabinId(cabinId),
   ]);
 
-  const session = await auth();
+  const session: TAuthSession = await auth();
 
   return (
     <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">

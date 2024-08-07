@@ -1,21 +1,15 @@
 import { PropsWithChildren } from "react";
 import { DateRange } from "react-day-picker";
-import { User } from "next-auth";
+import { Session, User } from "next-auth";
 
 // #################################################
 // Common types
 // #################################################
 
-export type BookedDates = BookingDate[];
-export type BookingDate = Date;
-export type CabinFilter = CabinFilterOptions | "all";
-export type CabinFilterOptions = "small" | "medium" | "large";
-export type Country = { name: string; flag: string };
+export type TAuthSession = Session | null;
 export type DatabaseCreatedAt = string;
 export type DatabaseId = string;
-export type Email = string;
-export type FilterConditions = { low: number; high: number };
-export type NextAuthGoogleUser = { name: string; image: string; email: string };
+// export type Email = string;
 
 // #################################################
 // Database Types
@@ -82,20 +76,38 @@ export type Settings = {
 // Basic Component Props
 export type WithChildren = Readonly<PropsWithChildren>;
 
-// Specific Component Props
+// Page Props
+export type CabinPageProps = Readonly<{ params: { cabinId: DatabaseId } }>;
+export type CabinsPageProps = Readonly<{
+  searchParams: { [key: string]: CabinFilterOptions };
+}>;
+export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
+
+// Feature / Structure Props
 export type CabinCardProps = Readonly<{ cabin: CabinsList }>;
+export type CabinListProps = Readonly<{ filter: CabinFilter }>;
+export type CabinProps = Readonly<{ cabin: CabinDB }>;
 export type DateSelectorProps = Readonly<{
   bookedDates: BookedDates;
   cabin: CabinDB;
   settings: Settings;
 }>;
 export type DeleteReservationProps = Readonly<{ bookingId: DatabaseId }>;
-export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
+export type FilterButtonProps = Readonly<
+  {
+    activeFilter: string;
+    filter: CabinFilter;
+    onClick: (filter: CabinFilter) => void;
+  } & WithChildren
+>;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
 export type ReservationCardProps = Readonly<{ booking: BookingDB }>;
 export type ReservationFormProps = Readonly<{
   cabin: CabinDB;
   user: User;
+}>;
+export type ReservationProps = Readonly<{
+  cabin: CabinDB;
 }>;
 export type SelectCountryProps = Readonly<{
   className: string;
@@ -106,7 +118,12 @@ export type SelectCountryProps = Readonly<{
 export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;
 export type UpdateProfileFormProps = WithChildren;
 
-// Page and List Props
+// #################################################
+// Feature Data Types
+// #################################################
+
+export type BookedDates = Date[];
+// export type BookingDate = Date;
 export type BookingsList = Omit<
   BookingDB,
   | "cabinPrice"
@@ -116,23 +133,10 @@ export type BookingsList = Omit<
   | "observations"
   | "status"
 >;
-export type CabinListProps = Readonly<{ filter: CabinFilter }>;
-export type CabinPageProps = Readonly<{ params: { cabinId: DatabaseId } }>;
+export type CabinFilter = CabinFilterOptions | "all";
+export type CabinFilterOptions = "small" | "medium" | "large";
 export type CabinsList = Omit<CabinDB, "description">;
-export type CabinsPageProps = Readonly<{
-  searchParams: { [key: string]: CabinFilterOptions };
-}>;
-
-// Feature-Specific Props
-export type CabinProps = Readonly<{ cabin: CabinDB }>;
+export type Country = { name: string; flag: string };
 export type DatePickerDateRange = DateRange | undefined;
-export type FilterButtonProps = Readonly<
-  {
-    activeFilter: string;
-    filter: CabinFilter;
-    onClick: (filter: CabinFilter) => void;
-  } & WithChildren
->;
-export type ReservationProps = Readonly<{
-  cabin: CabinDB;
-}>;
+export type FilterConditions = { low: number; high: number };
+export type NextAuthGoogleUser = { name: string; image: string; email: string };
