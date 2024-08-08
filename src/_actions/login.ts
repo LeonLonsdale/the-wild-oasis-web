@@ -2,7 +2,5 @@
 
 import { signIn } from "@/_lib/auth";
 
-export async function loginAction() {
-  console.log("loginAction");
+export const loginAction = async () =>
   await signIn("google", { redirectTo: "/account" });
-}
