@@ -5,7 +5,6 @@ import type {
   CabinsList,
   Country,
   DatabaseId,
-  Email,
   Guest,
 } from "./types";
 import { supabase } from "./supabase";
@@ -60,7 +59,7 @@ export const getCabins = async function (): Promise<CabinsList[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: Email) {
+export async function getGuest(email: string) {
   const { data, error } = await supabase
     .from("guests")
     .select("*")

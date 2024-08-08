@@ -1,12 +1,13 @@
 import { PropsWithChildren } from "react";
 import { DateRange } from "react-day-picker";
-import { Session, User } from "next-auth";
+import { Account, Profile, Session, User } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
+import { NextRequest } from "next/server";
 
 // #################################################
 // Common types
 // #################################################
 
-export type TAuthSession = Session | null;
 export type DatabaseCreatedAt = string;
 export type DatabaseId = string;
 // export type Email = string;
@@ -51,11 +52,11 @@ export type Booking = Omit<BookingDB, "created_at" | "id">;
 
 // Guest Types
 export type GuestDB = {
-  countryFlag: string;
-  created_at: DatabaseCreatedAt;
+  countryFlag?: string;
+  created_at?: DatabaseCreatedAt;
   fullName: string;
-  nationalID: string;
-  nationality: string;
+  nationalID?: string;
+  nationality?: string;
 } & Omit<User, "name">;
 export type Guest = Omit<GuestDB, "created_at" | "id">;
 
@@ -139,4 +140,19 @@ export type CabinsList = Omit<CabinDB, "description">;
 export type Country = { name: string; flag: string };
 export type DatePickerDateRange = DateRange | undefined;
 export type FilterConditions = { low: number; high: number };
+
+// #################################################
+// Next Auth Types
+// #################################################
+
 export type NextAuthGoogleUser = { name: string; image: string; email: string };
+export type NextAuthSession = Session | null;
+export type NextAuthSignInCallback = {
+  user: User | AdapterUser;
+  account: Account | null;
+  profile?: Profile | undefined;
+};
+export type NextAuthAuthorizedCallback = {
+  auth: NextAuthSession;
+  request: NextRequest | undefined;
+};
