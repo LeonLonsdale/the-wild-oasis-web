@@ -57,7 +57,8 @@ export type GuestDB = {
   fullName: string;
   nationalID?: string;
   nationality?: string;
-} & Omit<User, "name">;
+  email: string;
+} & Omit<User, "name email">;
 export type Guest = Omit<GuestDB, "created_at" | "id">;
 
 // Settings
@@ -117,7 +118,8 @@ export type SelectCountryProps = Readonly<{
   name: string;
 }>;
 export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;
-export type UpdateProfileFormProps = WithChildren;
+export type UpdateProfileFormProps = Readonly<{ guest: GuestDB }> &
+  WithChildren;
 
 // #################################################
 // Feature Data Types
