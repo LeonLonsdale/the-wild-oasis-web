@@ -11,10 +11,10 @@ export const metadata = {
 export default async function ReservationsPage() {
   const session = await auth();
   if (!session || !session.user) redirect("/login");
-  const id = session.user.id;
+  const id = Number(session.user.id);
   if (!id) redirect("/login");
 
-  const bookings = await getBookings(84);
+  const bookings = await getBookings(id);
 
   return (
     <div>
