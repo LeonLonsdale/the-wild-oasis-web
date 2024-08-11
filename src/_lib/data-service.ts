@@ -102,14 +102,12 @@ export async function getBookings(
     throw new Error("Bookings could not get loaded");
   }
 
-  // Ensure that cabins is an object, not an array
-  const bookings = data.map((booking) => ({
+  if (!data) return [];
+
+  const bookings: ProfileReservations[] = data.map((booking) => ({
     ...booking,
-    cabins: {
-      name: booking.cabins.name,
-      image: booking.cabins.image,
-    }, // Access the first element if cabins is returned as an array
-  })) as ProfileReservations[];
+    cabins: Array.isArray(booking.cabins) ? booking.cabins[0] : booking.cabins,
+  }));
 
   return bookings;
 }
