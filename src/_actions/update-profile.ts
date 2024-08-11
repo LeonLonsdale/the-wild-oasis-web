@@ -2,6 +2,7 @@
 
 import { auth } from "@/_lib/auth";
 import { supabase } from "@/_lib/supabase";
+import { revalidatePath } from "next/cache";
 
 export const updateProfile = async (formData: FormData) => {
   const session = await auth();
@@ -26,4 +27,6 @@ export const updateProfile = async (formData: FormData) => {
     .eq("id", session.user.id);
 
   if (error) throw new Error("Could not update profile");
+
+  revalidatePath("/account/profile");
 };

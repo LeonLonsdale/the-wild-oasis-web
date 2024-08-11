@@ -3,7 +3,6 @@ import UpdateProfileForm from "@/_components/account/update-profile-form";
 import { auth } from "@/_lib/auth";
 import { getGuest } from "@/_lib/data-service";
 import { GuestDB } from "@/_lib/types";
-import { get } from "http";
 import { redirect } from "next/navigation";
 
 export const metadata = {
