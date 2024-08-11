@@ -1,13 +1,20 @@
 import ReservationCard from "@/_components/account/reservation-card";
-import { BookingDB } from "@/_lib/types";
+import { auth } from "@/_lib/auth";
+import { getBookings } from "@/_lib/data-service";
+import { Booking, BookingDB, ProfileReservations } from "@/_lib/types";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Reservations",
 };
 
-export default function ReservationsPage() {
-  // CHANGE
-  const bookings: BookingDB[] = [];
+export default async function ReservationsPage() {
+  const session = await auth();
+  if (!session || !session.user) redirect("/login");
+  const id = session.user.id;
+  if (!id) redirect("/login");
+
+  const bookings = await getBookings(84);
 
   return (
     <div>

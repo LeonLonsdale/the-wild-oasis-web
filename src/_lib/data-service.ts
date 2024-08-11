@@ -1,4 +1,6 @@
 import { eachDayOfInterval } from "date-fns";
+import { notFound } from "next/navigation";
+import { supabase } from "./supabase";
 import type {
   Booking,
   CabinDB,
@@ -6,9 +8,8 @@ import type {
   Country,
   DatabaseId,
   Guest,
+  ProfileReservations,
 } from "./types";
-import { supabase } from "./supabase";
-import { notFound } from "next/navigation";
 
 /////////////
 // GET
@@ -85,12 +86,13 @@ export async function getBooking(id: DatabaseId) {
   return data;
 }
 
-export async function getBookings(guestId: DatabaseId) {
-  const { data, error, count } = await supabase
+export async function getBookings(
+  guestId: number
+): Promise<ProfileReservations[]> {
+  const { data, error } = await supabase
     .from("bookings")
-    // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
     .select(
-      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)"
+      "id, created_at, status, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)"
     )
     .eq("guestId", guestId)
     .order("startDate");
@@ -100,7 +102,16 @@ export async function getBookings(guestId: DatabaseId) {
     throw new Error("Bookings could not get loaded");
   }
 
-  return data;
+  // Ensure that cabins is an object, not an array
+  const bookings = data.map((booking) => ({
+    ...booking,
+    cabins: {
+      name: booking.cabins.name,
+      image: booking.cabins.image,
+    }, // Access the first element if cabins is returned as an array
+  })) as ProfileReservations[];
+
+  return bookings;
 }
 
 export async function getBookedDatesByCabinId(

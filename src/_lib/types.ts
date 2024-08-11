@@ -29,17 +29,19 @@ export type CabinDB = {
 export type TCabin = Omit<CabinDB, "id">;
 
 // Booking Types
+type BookingCabinDetails = {
+  image: string;
+  name: string;
+};
 export type BookingDB = {
-  cabins: {
-    image: string;
-    name: string;
-  };
+  cabins: BookingCabinDetails;
   created_at: string;
   endDate: string;
   extrasPrice: number;
-  guestId: string;
+  cabinId: number;
+  guestId: number;
   hasBreakfast: boolean;
-  id: DatabaseId;
+  id: number;
   isPaid: boolean;
   numGuests: number;
   numNights: number;
@@ -49,6 +51,20 @@ export type BookingDB = {
   totalPrice: number;
 };
 export type Booking = Omit<BookingDB, "created_at" | "id">;
+export type ProfileReservations = Pick<
+  BookingDB,
+  | "id"
+  | "created_at"
+  | "startDate"
+  | "endDate"
+  | "numNights"
+  | "numGuests"
+  | "totalPrice"
+  | "guestId"
+  | "cabinId"
+  | "cabins"
+  | "status"
+>;
 
 // Guest Types
 export type GuestDB = {
@@ -94,7 +110,7 @@ export type DateSelectorProps = Readonly<{
   cabin: CabinDB;
   settings: Settings;
 }>;
-export type DeleteReservationProps = Readonly<{ bookingId: DatabaseId }>;
+export type DeleteReservationProps = Readonly<{ bookingId: number }>;
 export type FilterButtonProps = Readonly<
   {
     activeFilter: string;
@@ -103,7 +119,7 @@ export type FilterButtonProps = Readonly<
   } & WithChildren
 >;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
-export type ReservationCardProps = Readonly<{ booking: BookingDB }>;
+export type ReservationCardProps = Readonly<{ booking: ProfileReservations }>;
 export type ReservationFormProps = Readonly<{
   cabin: CabinDB;
   user: User;
