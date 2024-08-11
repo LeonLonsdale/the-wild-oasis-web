@@ -11,7 +11,6 @@ export const formatDistanceFromNow = (dateStr: string) =>
   }).replace("about ", "");
 
 function ReservationCard({ booking }: ReservationCardProps) {
-  console.log(booking);
   const {
     id,
     guestId,
