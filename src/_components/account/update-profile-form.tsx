@@ -2,7 +2,6 @@
 
 import { updateProfile } from "@/_actions";
 import { UpdateProfileFormProps } from "@/_lib/types";
-import UpdateProfileButton from "./update-profile-button";
 import SubmitButton from "../common/submit-button";
 
 export default function UpdateProfileForm({
@@ -61,7 +60,7 @@ export default function UpdateProfileForm({
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <SubmitButton>Update profile</SubmitButton>
+        <SubmitButton pendingLabel="Updating...">Update profile</SubmitButton>
       </div>
     </form>
   );

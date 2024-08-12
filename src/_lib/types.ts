@@ -136,7 +136,8 @@ export type SelectCountryProps = Readonly<{
   id: string;
   name: string;
 }>;
-export type SubmitButtonProps = WithChildren;
+export type SubmitButtonProps = Readonly<{ pendingLabel: string }> &
+  WithChildren;
 export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;
 export type UpdateProfileFormProps = Readonly<{ guest: GuestDB }> &
   WithChildren;
