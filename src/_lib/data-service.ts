@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { supabase } from "./supabase";
 import type {
   Booking,
+  BookingDB,
   CabinDB,
   CabinsList,
   Country,
@@ -71,7 +72,7 @@ export async function getGuest(email: string) {
   return data;
 }
 
-export async function getBooking(id: DatabaseId) {
+export async function getBooking(id: number): Promise<BookingDB> {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")

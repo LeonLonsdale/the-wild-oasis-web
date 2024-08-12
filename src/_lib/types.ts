@@ -9,7 +9,7 @@ import { NextRequest } from "next/server";
 // #################################################
 
 export type DatabaseCreatedAt = string;
-export type DatabaseId = string;
+export type DatabaseId = number;
 // export type Email = string;
 
 // #################################################
@@ -45,7 +45,7 @@ export type BookingDB = {
   isPaid: boolean;
   numGuests: number;
   numNights: number;
-  observations: string | null;
+  observations: string;
   startDate: string;
   status: "checked-in" | "checked-out" | "unconfirmed";
   totalPrice: number;
@@ -100,6 +100,9 @@ export type CabinsPageProps = Readonly<{
   searchParams: { [key: string]: CabinFilterOptions };
 }>;
 export type ErrorProps = Readonly<{ error: Error; reset: () => void }>;
+export type EditReservationPageProps = Readonly<{
+  params: { reservationId: number };
+}>;
 
 // Feature / Structure Props
 export type CabinCardProps = Readonly<{ cabin: CabinsList }>;
@@ -133,6 +136,7 @@ export type SelectCountryProps = Readonly<{
   id: string;
   name: string;
 }>;
+export type SubmitButtonProps = WithChildren;
 export type TextExpanderProps = Readonly<{ numWords: number }> & WithChildren;
 export type UpdateProfileFormProps = Readonly<{ guest: GuestDB }> &
   WithChildren;
