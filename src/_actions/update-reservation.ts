@@ -14,7 +14,7 @@ export const updateReservation = async (formData: FormData) => {
   const numGuests = Number(formData.get("numGuests")?.toString());
   const observations =
     formData.get("observations")?.toString().slice(0, 1000) || "";
-  const bookingId = Number(formData.get("bookingId"));
+  const bookingId = Number(formData.get("reservationId")?.toString());
 
   const updatedBooking = { numGuests, observations };
 
@@ -32,6 +32,7 @@ export const updateReservation = async (formData: FormData) => {
 
   if (error) throw new Error("Reservation could not be updated");
 
+  revalidatePath("/account/reservations");
   revalidatePath(`/account/reservations/edit/${bookingId}`);
   redirect("/account/reservations");
 };
