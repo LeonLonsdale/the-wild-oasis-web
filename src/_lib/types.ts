@@ -37,7 +37,7 @@ type BookingCabinDetails = {
 export type BookingDB = {
   cabins: BookingCabinDetails;
   created_at: string;
-  endDate: string;
+  endDate: Date;
   extrasPrice: number;
   cabinId: number;
   guestId: number;
@@ -47,11 +47,16 @@ export type BookingDB = {
   numGuests: number;
   numNights: number;
   observations: string;
-  startDate: string;
+  startDate: Date;
   status: "checked-in" | "checked-out" | "unconfirmed";
   totalPrice: number;
+  cabinPrice: number;
 };
 export type Booking = Omit<BookingDB, "created_at" | "id">;
+export type NewBooking = Pick<
+  BookingDB,
+  "startDate" | "endDate" | "numNights" | "cabinPrice" | "cabinId"
+>;
 export type ProfileReservations = Pick<
   BookingDB,
   | "id"
