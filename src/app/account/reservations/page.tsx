@@ -1,7 +1,6 @@
-import ReservationCard from "@/_components/account/reservation-card";
+import ReservationList from "@/_components/account/reservation-list";
 import { auth } from "@/_lib/auth";
 import { getBookings } from "@/_lib/data-service";
-import { Booking, BookingDB, ProfileReservations } from "@/_lib/types";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -30,11 +29,7 @@ export default async function ReservationsPage() {
           </a>
         </p>
       ) : (
-        <ul className="space-y-6">
-          {bookings.map((booking) => (
-            <ReservationCard booking={booking} key={booking.id} />
-          ))}
-        </ul>
+        <ReservationList bookings={bookings} />
       )}
     </div>
   );

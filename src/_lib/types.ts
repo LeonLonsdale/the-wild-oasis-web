@@ -10,6 +10,7 @@ import { NextRequest } from "next/server";
 
 export type DatabaseCreatedAt = string;
 export type DatabaseId = number;
+export type onDeleteReservation = (id: number) => Promise<void>;
 // export type Email = string;
 
 // #################################################
@@ -113,7 +114,10 @@ export type DateSelectorProps = Readonly<{
   cabin: CabinDB;
   settings: Settings;
 }>;
-export type DeleteReservationProps = Readonly<{ bookingId: number }>;
+export type DeleteReservationProps = Readonly<{
+  bookingId: number;
+  onDelete: onDeleteReservation;
+}>;
 export type FilterButtonProps = Readonly<
   {
     activeFilter: string;
@@ -122,10 +126,16 @@ export type FilterButtonProps = Readonly<
   } & WithChildren
 >;
 export type NavLinkProps = Readonly<{ href: string } & WithChildren>;
-export type ReservationCardProps = Readonly<{ booking: ProfileReservations }>;
+export type ReservationCardProps = Readonly<{
+  booking: ProfileReservations;
+  onDelete: onDeleteReservation;
+}>;
 export type ReservationFormProps = Readonly<{
   cabin: CabinDB;
   user: User;
+}>;
+export type ReservationListProps = Readonly<{
+  bookings: ProfileReservations[];
 }>;
 export type ReservationProps = Readonly<{
   cabin: CabinDB;
