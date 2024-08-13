@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
 import { type DatePickerDateRange } from "@/_lib/types";
+import { createContext, useContext, useState } from "react";
 
 type TReservationContext = {
   range: DatePickerDateRange;
@@ -46,4 +46,4 @@ const useReservationContext = () => {
   return value;
 };
 
-export { useReservationContext, ReservationContextProvider };
+export { ReservationContextProvider, useReservationContext };

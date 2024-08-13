@@ -125,13 +125,14 @@ export async function getBookedDatesByCabinId(
     .from("bookings")
     .select("*")
     .eq("cabinId", cabinId)
-    .or(`startDate.gte.${todayISOString},status.eq.checked-in`);
+    .or(`startDate.gte.${todayISOString}, status.eq.checked-in`);
+  // .gte("startDate", todayISOString);
+  // ,status.eq.checked-in
 
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
   }
-
   // Converting to actual dates to be displayed in the date picker
   const bookedDates = data
     .map((booking) => {

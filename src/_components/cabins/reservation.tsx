@@ -5,6 +5,9 @@ import ReservationForm from "./reservation-form";
 import { auth } from "@/_lib/auth";
 import LoginMessage from "./login-message";
 
+// export const revalidate = 0;
+// export const dynamic = "force-dynamic";
+
 export default async function Reservation({ cabin }: ReservationProps) {
   const cabinId = cabin.id;
   const [settings, bookings] = await Promise.all([
